@@ -49,9 +49,10 @@ OBJS +=build/heap_1.o
 
 BUILDDIR =./build
 
-.PHONY: all clean
+.PHONY: all clean samples_build
 
-all : builddir $(APP_NAME).elf
+# 👇 Modified: add samples_build call
+all : builddir $(APP_NAME).elf samples_build
 
 builddir : | $(BUILDDIR)
 
@@ -62,6 +63,7 @@ clean :
 	rm -rf ./build
 	rm -f *.elf
 	rm -f *.map
+	@$(MAKE) -C samples clean --no-print-directory
 
 $(APP_NAME).elf : src/raspberrypi4.ld $(OBJS)
 	$(CROSS)gcc -Wl,-Map=$(APP_NAME).map -Wl,--build-id=none -std=gnu99 -T src/raspberrypi4.ld -o $@ -ffreestanding --specs=rdimon.specs $(OBJS)
@@ -89,4 +91,9 @@ build/%.o : ../../../Source/portable/GCC/ARM_CA72_64_BIT/%.S
 
 build/%.o : ../../../Source/portable/MemMang/%.c
 	$(CROSS)gcc $(CFLAGS)  -c -o $@ $<
+
+# 👇 Added: samples invocation
+samples_build:
+	@echo "Building sample project..."
+	@$(MAKE) -C samples --no-print-directory
 
