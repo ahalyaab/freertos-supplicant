@@ -70,9 +70,6 @@
 #define NLA_FLAG   6
 #define NLA_NESTED 7
 
-struct nla_policy {
-    int type;
-};
 
 /* ===== Alignment macros ===== */
 #define NLA_ALIGNTO 4
