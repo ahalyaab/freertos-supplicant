@@ -30,7 +30,25 @@
 #define SIOCDELMULTI    0x8932
 
 /* ==== Forward declaration of ifreq ==== */
-struct ifreq;
+struct sockaddr;
+
+
+struct ifreq {
+    char ifr_name[IFNAMSIZ];
+    union {
+        struct sockaddr ifru_addr;
+        struct sockaddr ifru_hwaddr;
+        int ifru_flags;
+        int ifru_ivalue;
+        char ifru_slave[IFNAMSIZ];
+        char *ifru_newname;
+    } ifr_ifru;
+};
+
+#define ifr_addr    ifr_ifru.ifru_addr
+#define ifr_hwaddr  ifr_ifru.ifru_hwaddr
+#define ifr_flags   ifr_ifru.ifru_flags
+#define ifr_ifindex ifr_ifru.ifru_ivalue
 
 /* ==== Stub versions of if_nametoindex / if_indextoname ==== */
 static inline unsigned int if_nametoindex(const char *ifname)
