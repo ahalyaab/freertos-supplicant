@@ -13,7 +13,7 @@
 #include "crypto/sha1.h"
 
 
-int main(int argc, char *argv[])
+int wpa_passphrase_main(int argc, char *argv[])
 {
 	struct termios term;
 	unsigned char psk[32];

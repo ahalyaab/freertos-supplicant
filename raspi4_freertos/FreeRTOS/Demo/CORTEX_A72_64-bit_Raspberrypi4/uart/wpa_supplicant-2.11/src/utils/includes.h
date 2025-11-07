@@ -33,6 +33,19 @@
 #include <unistd.h>
 #endif /* _MSC_VER */
 
+#ifdef FREERTOS
+#include "sys/socket.h"
+#include "netinet/in.h"
+#include "arpa/inet.h"
+#include "sys/uio.h"
+#include "sys/time.h"
+#include "linux/types.h"
+#include "linux/socket.h"
+#include "linux/netlink.h"
+#include "linux/genetlink.h"
+#include "linux/nl_stub_all.h"
+#else /* Linux / POSIX build */
+
 #ifndef CONFIG_NATIVE_WINDOWS
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -42,5 +55,5 @@
 #include <sys/time.h>
 #endif /* __vxworks */
 #endif /* CONFIG_NATIVE_WINDOWS */
-
+#endif
 #endif /* INCLUDES_H */

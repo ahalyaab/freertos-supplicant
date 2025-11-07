@@ -3577,6 +3577,7 @@ nomem:
  *
  * Getter for "State" property.
  */
+
 dbus_bool_t wpas_dbus_getter_state(
 	const struct wpa_dbus_property_desc *property_desc,
 	DBusMessageIter *iter, DBusError *error, void *user_data)

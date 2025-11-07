@@ -12,6 +12,7 @@
 
 #include "dbus_new_helpers.h"
 
+
 struct network_handler_args {
 	struct wpa_supplicant *wpa_s;
 	struct wpa_ssid *ssid;
