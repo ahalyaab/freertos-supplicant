@@ -22,6 +22,19 @@ struct sock_fprog {
     struct sock_filter *filter;    /* Pointer to array of instructions */
 };
 
+
+typedef int socklen_t;
+
+#define SOCK_STREAM 1
+#define SOCK_DGRAM  2
+#define SOCK_RAW    3
+
+#define SOL_SOCKET  1
+#define SO_ATTACH_FILTER 26
+
+
+
+
 /* ---- BPF instruction classes ---- */
 #define BPF_LD     0x00
 #define BPF_LDX    0x01
