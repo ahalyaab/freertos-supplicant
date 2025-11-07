@@ -53,5 +53,15 @@ struct nla_policy {
 #define NLA_ALIGN(len) (((len) + NLA_ALIGNTO - 1) & ~(NLA_ALIGNTO - 1))
 #define NLA_HDRLEN ((int) NLA_ALIGN(sizeof(struct nlattr)))
 
+/* Helper macros for working with Netlink messages */
+#define NLMSG_ALIGNTO 4
+#define NLMSG_ALIGN(len) (((len) + NLMSG_ALIGNTO - 1) & ~(NLMSG_ALIGNTO - 1))
+#define NLMSG_HDRLEN ((int) NLMSG_ALIGN(sizeof(struct nlmsghdr)))
+
+/* Retrieve pointer to netlink message header */
+#define nlmsg_hdr(nmsg) ((struct nlmsghdr *) (nmsg))
+
+
+
 #endif /* _LINUX_NETLINK_H_ */
 
