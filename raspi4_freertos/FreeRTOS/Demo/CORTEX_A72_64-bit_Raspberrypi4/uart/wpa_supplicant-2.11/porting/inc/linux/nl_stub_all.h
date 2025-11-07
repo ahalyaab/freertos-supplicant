@@ -58,20 +58,7 @@
 #define CTRL_ATTR_HDRSIZE       4
 #define CTRL_ATTR_MAXATTR       5
 
-/* ===== Netlink message and attribute structures ===== */
-struct nlmsghdr {
-    __u32 nlmsg_len;
-    __u16 nlmsg_type;
-    __u16 nlmsg_flags;
-    __u32 nlmsg_seq;
-    __u32 nlmsg_pid;
-};
 
-struct nlattr {
-    __u16 nla_len;
-    __u16 nla_type;
-    /* payload follows */
-};
 
 /* ===== Attribute types ===== */
 #define NLA_UNSPEC 0
