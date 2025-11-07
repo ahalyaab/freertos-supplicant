@@ -1,133 +1,85 @@
-#ifndef _SYS_SOCKET_H_
-#define _SYS_SOCKET_H_
+#ifndef _FREERTOS_LINUX_FILTER_H_
+#define _FREERTOS_LINUX_FILTER_H_
 
 /*
- * Minimal stub for FreeRTOS cross-compile of wpa_supplicant.
- * These definitions only satisfy compile-time references — no actual socket use.
+ * Minimal stub for <linux/filter.h>
+ * Provides fake BPF structures and macros so wpa_supplicant builds under FreeRTOS.
  */
 
 #include <stdint.h>
 
-typedef int socklen_t;
-
-/* ==== Address Structures ==== */
-struct sockaddr {
-    unsigned short sa_family;
-    char sa_data[14];
+/* Basic BPF instruction structure (simplified) */
+struct sock_filter {
+    uint16_t code;   /* Instruction code */
+    uint8_t jt;      /* Jump if true */
+    uint8_t jf;      /* Jump if false */
+    uint32_t k;      /* Generic multiuse field */
 };
 
-struct in_addr {
-    uint32_t s_addr;
+/* Program of BPF instructions */
+struct sock_fprog {
+    unsigned short len;            /* Number of instructions */
+    struct sock_filter *filter;    /* Pointer to array of instructions */
 };
 
-struct sockaddr_in {
-    short sin_family;
-    unsigned short sin_port;
-    struct in_addr sin_addr;
-    char sin_zero[8];
-};
+/* ---- BPF instruction classes ---- */
+#define BPF_LD     0x00
+#define BPF_LDX    0x01
+#define BPF_ST     0x02
+#define BPF_STX    0x03
+#define BPF_ALU    0x04
+#define BPF_JMP    0x05
+#define BPF_RET    0x06
+#define BPF_MISC   0x07
 
-/* ==== Basic Socket Constants ==== */
-#define AF_INET        2
-#define PF_INET        AF_INET
-#define AF_PACKET      17
-#define PF_PACKET      AF_PACKET
+/* ---- Data widths ---- */
+#define BPF_W      0x00
+#define BPF_H      0x08
+#define BPF_B      0x10
 
-#define SOCK_STREAM    1
-#define SOCK_DGRAM     2
-#define SOCK_RAW       3
+/* ---- Addressing modes ---- */
+#define BPF_IMM    0x00
+#define BPF_ABS    0x20
+#define BPF_IND    0x40
+#define BPF_MEM    0x60
+#define BPF_LEN    0x80
+#define BPF_MSH    0xa0
 
-#define SOL_SOCKET     1
+/* ---- ALU operations ---- */
+#define BPF_ADD    0x00
+#define BPF_SUB    0x10
+#define BPF_MUL    0x20
+#define BPF_DIV    0x30
+#define BPF_OR     0x40
+#define BPF_AND    0x50
+#define BPF_LSH    0x60
+#define BPF_RSH    0x70
+#define BPF_NEG    0x80
+
+/* ---- Jump operations ---- */
+#define BPF_JA     0x00
+#define BPF_JEQ    0x10
+#define BPF_JGT    0x20
+#define BPF_JGE    0x30
+#define BPF_JSET   0x40
+
+/* ---- Source operand ---- */
+#define BPF_K      0x00
+#define BPF_X      0x08
+#define BPF_A      0x10
+
+/* ---- Misc ---- */
+#define BPF_TAX    0x00
+#define BPF_TXA    0x80
+
+/* ---- Helper macros ---- */
+#define BPF_CLASS(code)   ((code) & 0x07)
+#define BPF_STMT(code, k) { (uint16_t)(code), 0, 0, (uint32_t)(k) }
+#define BPF_JUMP(code, k, jt, jf) { (uint16_t)(code), (uint8_t)(jt), (uint8_t)(jf), (uint32_t)(k) }
+
+/* ---- Socket filter attach options ---- */
 #define SO_ATTACH_FILTER 26
 #define SO_DETACH_FILTER 27
 
-#define INADDR_ANY     ((unsigned long)0x00000000)
-
-/* ==== Dummy ioctl-related structures ==== */
-
-
-#ifndef IFNAMSIZ
-#define IFNAMSIZ 16
-#endif
-
-/* Simplified Linux-style ifreq structure for wpa_supplicant stubbing */
-struct ifreq {
-    char ifr_name[IFNAMSIZ]; /* Interface name, e.g., "eth0" */
-
-    union {
-        struct sockaddr ifru_addr;
-        struct sockaddr ifru_dstaddr;
-        struct sockaddr ifru_broadaddr;
-
-        struct {
-            unsigned short sa_family;
-            char sa_data[14];
-        } ifru_hwaddr; /* Hardware address (MAC) */
-
-        short ifru_flags;
-        int ifru_ivalue;
-        char ifru_slave[IFNAMSIZ];
-        char *ifru_newname;
-        void *ifru_data;
-    } ifr_ifru;
-};
-
-/* Linux-style convenience macros */
-#define ifr_addr        ifr_ifru.ifru_addr
-#define ifr_dstaddr     ifr_ifru.ifru_dstaddr
-#define ifr_broadaddr   ifr_ifru.ifru_broadaddr
-#define ifr_hwaddr      ifr_ifru.ifru_hwaddr
-#define ifr_flags       ifr_ifru.ifru_flags
-#define ifr_ifindex     ifr_ifru.ifru_ivalue
-#define ifr_slave       ifr_ifru.ifru_slave
-#define ifr_newname     ifr_ifru.ifru_newname
-#define ifr_data        ifr_ifru.ifru_data
-
-
-
-
-/* ==== Stubbed Socket API ==== */
-static inline int socket(int domain, int type, int protocol)
-{
-    (void)domain; (void)type; (void)protocol;
-    return 0;
-}
-
-static inline int setsockopt(int fd, int level, int optname, const void *optval, unsigned int optlen)
-{
-    (void)fd; (void)level; (void)optname; (void)optval; (void)optlen;
-    return 0;
-}
-
-static inline int bind(int s, const struct sockaddr *addr, socklen_t len)
-{
-    (void)s; (void)addr; (void)len;
-    return -1;
-}
-
-static inline int connect(int s, const struct sockaddr *addr, socklen_t len)
-{
-    (void)s; (void)addr; (void)len;
-    return -1;
-}
-
-static inline int send(int s, const void *buf, int len, int flags)
-{
-    (void)s; (void)buf; (void)len; (void)flags;
-    return -1;
-}
-
-static inline int recv(int s, void *buf, int len, int flags)
-{
-    (void)s; (void)buf; (void)len; (void)flags;
-    return -1;
-}
-
-//static inline int close(int fd)
-//{
-  //  (void)fd;
-    //return 0;
-//}
-
-#endif /* _SYS_SOCKET_H_ */
+#endif /* _FREERTOS_LINUX_FILTER_H_ */
 
