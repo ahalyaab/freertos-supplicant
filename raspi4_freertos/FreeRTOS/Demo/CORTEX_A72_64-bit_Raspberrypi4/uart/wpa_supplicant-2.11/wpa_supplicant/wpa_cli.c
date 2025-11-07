@@ -5064,7 +5064,7 @@ static char * wpa_cli_get_default_ifname(void)
 }
 
 
-int main(int argc, char *argv[])
+int wpa_cli_main(int argc, char *argv[])
 {
 	int c;
 	int daemonize = 0;
@@ -5189,7 +5189,7 @@ int main(int argc, char *argv[])
 }
 
 #else /* CONFIG_CTRL_IFACE */
-int main(int argc, char *argv[])
+int wpa_cli_main(int argc, char *argv[])
 {
 	printf("CONFIG_CTRL_IFACE not defined - wpa_cli disabled\n");
 	return -1;

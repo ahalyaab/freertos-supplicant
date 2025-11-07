@@ -16,6 +16,7 @@
 struct wpa_dbus_property_desc;
 
 struct wpas_dbus_priv {
+	
 	DBusConnection *con;
 	int should_dispatch;
 	struct wpa_global *global;

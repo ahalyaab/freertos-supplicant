@@ -982,8 +982,10 @@ int wps_validate_m8_encr(const struct wpabuf *tlvs, int ap, int wps2);
 int wps_validate_wsc_ack(const struct wpabuf *tlvs);
 int wps_validate_wsc_nack(const struct wpabuf *tlvs);
 int wps_validate_wsc_done(const struct wpabuf *tlvs);
+
 int wps_validate_upnp_set_selected_registrar(const struct wpabuf *tlvs);
 #else /* CONFIG_WPS_STRICT */
+#ifndef NO_WPS_INLINE_VALIDATE
 static inline int wps_validate_beacon(const struct wpabuf *wps_ie){
 	return 0;
 }
@@ -1076,6 +1078,7 @@ static inline int wps_validate_m8(const struct wpabuf *tlvs)
 	return 0;
 }
 
+
 static inline int wps_validate_m8_encr(const struct wpabuf *tlvs, int ap,
 				       int wps2)
 {
@@ -1102,6 +1105,7 @@ static inline int wps_validate_upnp_set_selected_registrar(
 {
 	return 0;
 }
+#endif
 #endif /* CONFIG_WPS_STRICT */
 
 #endif /* WPS_H */

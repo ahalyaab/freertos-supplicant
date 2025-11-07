@@ -9,6 +9,7 @@
  */
 
 #include "utils/includes.h"
+
 #include <dbus/dbus.h>
 
 #include "utils/common.h"

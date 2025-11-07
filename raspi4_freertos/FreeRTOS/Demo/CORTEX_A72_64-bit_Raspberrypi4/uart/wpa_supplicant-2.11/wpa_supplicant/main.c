@@ -179,7 +179,7 @@ static int wpa_supplicant_init_match(struct wpa_global *global)
 #endif /* CONFIG_MATCH_IFACE */
 
 
-int main(int argc, char *argv[])
+int wpa_supplicant_main(int argc, char *argv[])
 {
 	int c, i;
 	struct wpa_interface *ifaces, *iface;
