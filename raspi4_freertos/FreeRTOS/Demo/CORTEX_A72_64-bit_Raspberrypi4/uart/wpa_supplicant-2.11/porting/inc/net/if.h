@@ -1,3 +1,9 @@
+
+#include <sys/socket.h>
+
+
+
+
 #ifndef _FREERTOS_NET_IF_H_
 #define _FREERTOS_NET_IF_H_
 
@@ -5,9 +11,8 @@
  * Minimal stub for <net/if.h>
  * Used to satisfy wpa_supplicant compilation on non-Linux (FreeRTOS) builds.
  */
-
 #include <stdint.h>
-#include <sys/socket.h>
+
 
 /* ==== Interface name constants ==== */
 #ifndef IFNAMSIZ
@@ -30,8 +35,15 @@
 #define SIOCDELMULTI    0x8932
 
 /* ==== Forward declaration of ifreq ==== */
-struct sockaddr;
 
+
+
+#ifndef _SYS_SOCKET_H_
+struct sockaddr {
+    unsigned short sa_family;
+    char sa_data[14];
+};
+#endif
 
 struct ifreq {
     char ifr_name[IFNAMSIZ];
