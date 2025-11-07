@@ -40,6 +40,14 @@ struct nlattr {
     __u16 nla_type;
 };
 
+/* Attribute validation policy structure */
+struct nla_policy {
+    __u16 type;     /* Attribute type */
+    __u16 len;      /* Fixed length if applicable */
+    __u16 minlen;   /* Minimum valid length */
+    __u16 maxlen;   /* Maximum valid length */
+};
+
 /* Alignment macros */
 #define NLA_ALIGNTO 4
 #define NLA_ALIGN(len) (((len) + NLA_ALIGNTO - 1) & ~(NLA_ALIGNTO - 1))
