@@ -3,7 +3,7 @@
 
 /*
  * Minimal stub for <linux/filter.h>
- * Provides fake BPF structures so wpa_supplicant builds under FreeRTOS.
+ * Provides fake BPF structures and macros so wpa_supplicant builds under FreeRTOS.
  */
 
 #include <stdint.h>
@@ -22,7 +22,7 @@ struct sock_fprog {
     struct sock_filter *filter;    /* Pointer to array of instructions */
 };
 
-/* Dummy BPF opcode constants (to satisfy compilation) */
+/* ---- BPF instruction classes ---- */
 #define BPF_LD     0x00
 #define BPF_LDX    0x01
 #define BPF_ST     0x02
@@ -32,27 +32,54 @@ struct sock_fprog {
 #define BPF_RET    0x06
 #define BPF_MISC   0x07
 
-/* Return codes */
+/* ---- Data widths ---- */
+#define BPF_W      0x00
+#define BPF_H      0x08
+#define BPF_B      0x10
+
+/* ---- Addressing modes ---- */
+#define BPF_IMM    0x00
+#define BPF_ABS    0x20
+#define BPF_IND    0x40
+#define BPF_MEM    0x60
+#define BPF_LEN    0x80
+#define BPF_MSH    0xa0
+
+/* ---- ALU operations ---- */
+#define BPF_ADD    0x00
+#define BPF_SUB    0x10
+#define BPF_MUL    0x20
+#define BPF_DIV    0x30
+#define BPF_OR     0x40
+#define BPF_AND    0x50
+#define BPF_LSH    0x60
+#define BPF_RSH    0x70
+#define BPF_NEG    0x80
+
+/* ---- Jump operations ---- */
+#define BPF_JA     0x00
+#define BPF_JEQ    0x10
+#define BPF_JGT    0x20
+#define BPF_JGE    0x30
+#define BPF_JSET   0x40
+
+/* ---- Source operand ---- */
 #define BPF_K      0x00
 #define BPF_X      0x08
 #define BPF_A      0x10
 
-#define BPF_ABS    0x20
-#define BPF_IMM    0x00
-#define BPF_MEM    0x60
+/* ---- Misc ---- */
+#define BPF_TAX    0x00
+#define BPF_TXA    0x80
 
-/* Optional: fake attach/detach macros */
+/* ---- Helper macros ---- */
+#define BPF_CLASS(code)   ((code) & 0x07)
+#define BPF_STMT(code, k) { (uint16_t)(code), 0, 0, (uint32_t)(k) }
+#define BPF_JUMP(code, k, jt, jf) { (uint16_t)(code), (uint8_t)(jt), (uint8_t)(jf), (uint32_t)(k) }
+
+/* ---- Socket filter attach options ---- */
 #define SO_ATTACH_FILTER 26
 #define SO_DETACH_FILTER 27
 
 #endif /* _FREERTOS_LINUX_FILTER_H_ */
-
-/* Add these to the end of porting/inc/linux/filter.h */
-
-/* Additional BPF macros for Linux socket filters */
-#define BPF_H  0x08
-#define BPF_JEQ 0x10
-
-#define BPF_STMT(code, k) { (uint16_t)(code), 0, 0, (uint32_t)(k) }
-#define BPF_JUMP(code, k, jt, jf) { (uint16_t)(code), (uint8_t)(jt), (uint8_t)(jf), (uint32_t)(k) }
 
