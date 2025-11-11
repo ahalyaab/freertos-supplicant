@@ -6,7 +6,7 @@
  */
 
 #include <stddef.h>
-#ifdef !defined(HAVE_STRUCT_IOVEC) && !defined(_SYS_SOCKET_H_)
+#if !defined(HAVE_STRUCT_IOVEC) && !defined(_SYS_SOCKET_H_)
 struct iovec {
     void  *iov_base; /* Starting address */
     size_t iov_len;  /* Number of bytes */
