@@ -46,7 +46,7 @@ struct sockaddr {
     char sa_data[14];
 };
 
-struct in_addr {
+/*struct in_addr {
     unsigned int s_addr;
 };
 
@@ -56,6 +56,7 @@ struct sockaddr_in {
     struct in_addr sin_addr;
     char sin_zero[8];
 };
+*/
 
 /* ---------------------------------------------------------------------
  *                         SCATTER/GATHER I/O STRUCTURES
