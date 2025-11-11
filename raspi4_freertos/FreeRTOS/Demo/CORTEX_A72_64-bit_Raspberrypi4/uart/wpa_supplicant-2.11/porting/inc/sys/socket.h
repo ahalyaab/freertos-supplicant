@@ -130,6 +130,8 @@ static inline int getsockopt(int sockfd, int level, int optname,
  * --------------------------------------------------------------------*/
 
 /* Basic BPF instruction structure */
+#ifndef _LINUX_FILTER_H_
+#define _LINUX_FILTER_H_
 struct sock_filter {
     uint16_t code;   /* Instruction code */
     uint8_t jt;      /* Jump if true */
@@ -142,7 +144,7 @@ struct sock_fprog {
     unsigned short len;            /* Number of instructions */
     struct sock_filter *filter;    /* Pointer to array of instructions */
 };
-
+#endif
 /* ---- BPF instruction classes ---- */
 #define BPF_LD     0x00
 #define BPF_LDX    0x01
