@@ -153,12 +153,16 @@ DRIVERS_SOURCES = $(DRIVERS_SRCDIR)/driver_common.c \
                   $(DRIVERS_SRCDIR)/driver_nl80211_monitor.c \
                   $(DRIVERS_SRCDIR)/driver_nl80211_scan.c \
                   $(DRIVERS_SRCDIR)/netlink.c \
-                  $(DRIVERS_SRCDIR)/linux_ioctl.c \
                   $(DRIVERS_SRCDIR)/rfkill.c \
-                  $(DRIVERS_SRCDIR)/driver_wext.c \
                   $(DRIVERS_SRCDIR)/drivers.c \
 		  $(DRIVERS_SRCDIR)/driver_macsec_linux.c \
 		  $(DRIVERS_SRCDIR)/driver_nl80211.c
+
+
+# Comment out or remove these lines
+#DRIVERS += driver_wext.c
+#DRIVERS += linux_ioctl.c
+
 
 
 # List of source files in utils directory
