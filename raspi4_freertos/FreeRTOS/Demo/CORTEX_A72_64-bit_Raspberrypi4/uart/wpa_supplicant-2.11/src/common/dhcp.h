@@ -1,4 +1,5 @@
 /*
+ *
  * DHCP definitions
  * Copyright (c) 2014-2017, Qualcomm Atheros, Inc.
  *
@@ -9,7 +10,12 @@
 #ifndef DHCP_H
 #define DHCP_H
 
+#if defined(__linux__) || defined(__unix__)
 #include <netinet/ip.h>
+#else
+/* FreeRTOS/lwIP builds skip this */
+#endif
+
 #if __FAVOR_BSD
 #include <netinet/udp.h>
 #else
