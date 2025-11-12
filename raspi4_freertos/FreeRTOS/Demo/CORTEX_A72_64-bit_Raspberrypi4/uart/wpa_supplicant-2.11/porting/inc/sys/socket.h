@@ -192,5 +192,36 @@ static inline int getsockopt(int sockfd, int level, int optname,
 #define SO_ATTACH_FILTER 26
 #define SO_DETACH_FILTER 27
 
+
+/* ---------------------------------------------------------------------
+ *                  Netlink and Misc Socket Definitions
+ * --------------------------------------------------------------------*/
+
+/* sa_family_t stub */
+#ifndef sa_family_t
+typedef unsigned short sa_family_t;
+#endif
+
+/* Protocol families */
+#ifndef PF_NETLINK
+#define PF_NETLINK 16
+#endif
+#ifndef AF_NETLINK
+#define AF_NETLINK PF_NETLINK
+#endif
+
+/* recvfrom flag */
+#ifndef MSG_DONTWAIT
+#define MSG_DONTWAIT 0x40
+#endif
+
+/* recvfrom stub */
+static inline int recvfrom(int sockfd, void *buf, size_t len, int flags,
+                           struct sockaddr *src_addr, socklen_t *addrlen)
+{
+    (void)sockfd; (void)buf; (void)len; (void)flags; (void)src_addr; (void)addrlen;
+    return -1;
+}
+
 #endif /* _SYS_SOCKET_H_ */
 
