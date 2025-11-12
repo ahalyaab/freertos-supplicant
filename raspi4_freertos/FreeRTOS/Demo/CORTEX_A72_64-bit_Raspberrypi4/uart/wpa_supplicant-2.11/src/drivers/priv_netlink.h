@@ -80,7 +80,7 @@ struct sockaddr_nl
 	u32 nl_pid;
 	u32 nl_groups;
 };
-
+/*
 struct nlmsghdr
 {
 	u32 nlmsg_len;
@@ -89,7 +89,7 @@ struct nlmsghdr
 	u32 nlmsg_seq;
 	u32 nlmsg_pid;
 };
-
+*/
 struct ifinfomsg
 {
 	unsigned char ifi_family;
