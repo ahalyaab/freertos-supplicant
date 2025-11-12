@@ -58,6 +58,14 @@ struct nla_policy {
 #define NLMSG_ALIGN(len) (((len) + NLMSG_ALIGNTO - 1) & ~(NLMSG_ALIGNTO - 1))
 #define NLMSG_HDRLEN ((int) NLMSG_ALIGN(sizeof(struct nlmsghdr)))
 
+
+
+/* Netlink attribute flags (missing in FreeRTOS stubs) */
+#ifndef NLA_F_NESTED
+#define NLA_F_NESTED (1 << 15)
+#endif
+
+
 /* Retrieve pointer to netlink message header */
 #define nlmsg_hdr(nmsg) ((struct nlmsghdr *) (nmsg))
 
