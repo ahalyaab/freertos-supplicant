@@ -25,6 +25,25 @@ struct sockaddr_in {
     unsigned char sin_zero[8];
 };
 
+
+struct iphdr {
+    uint8_t  ihl:4;
+    uint8_t  version:4;
+    uint8_t  tos;
+    uint16_t tot_len;
+    uint16_t id;
+    uint16_t frag_off;
+    uint8_t  ttl;
+    uint8_t  protocol;
+    uint16_t check;
+    uint32_t saddr;
+    uint32_t daddr;
+};
+
+
+
+
+
 /* Byte order helpers (simple stubs) */
 static inline uint16_t htons(uint16_t x) { return (uint16_t)((x << 8) | (x >> 8)); }
 static inline uint16_t ntohs(uint16_t x) { return htons(x); }
