@@ -154,14 +154,19 @@ DRIVERS_SOURCES = $(DRIVERS_SRCDIR)/driver_common.c \
                   $(DRIVERS_SRCDIR)/driver_nl80211_scan.c \
                   $(DRIVERS_SRCDIR)/netlink.c \
                   $(DRIVERS_SRCDIR)/rfkill.c \
-                  $(DRIVERS_SRCDIR)/drivers.c \
-		  $(DRIVERS_SRCDIR)/driver_macsec_linux.c \
-		  $(DRIVERS_SRCDIR)/driver_nl80211.c
+        	  $(DRIVERS_SRCDIR)/drivers.c \
+		
+
+
+
+
+#DRIVERS_SOURCES +=	$(DRIVERS_SRCDIR)/driver_macsec_linux.c 
+#DRIVERS_SOURCES += $(DRIVERS_SRCDIR)/driver_nl80211.c
 
 
 # Comment out or remove these lines
-#DRIVERS += driver_wext.c
-#DRIVERS += linux_ioctl.c
+#DRIVERS_SOURCES += driver_wext.c
+#DRIVERS_SOURCES  += linux_ioctl.c
 
 
 
@@ -199,8 +204,14 @@ EAP_PEER_SOURCES = $(EAP_PEER_SRCDIR)/eap_tls.c \
                    $(EAP_PEER_SRCDIR)/eap_wsc.c \
                    $(EAP_PEER_SRCDIR)/eap_ikev2.c \
                    $(EAP_PEER_SRCDIR)/ikev2.c \
-                   $(EAP_PEER_SRCDIR)/eap_tnc.c $(EAP_PEER_SRCDIR)/tncc.c $(EAP_PEER_SRCDIR)/eap_methods.c \
-		   $(EAP_PEER_SRCDIR)/eap_tls_common.c $(EAP_PEER_SRCDIR)/eap.c
+                   
+	#$(EAP_PEER_SRCDIR)/eap_tnc.c 
+		   
+		   #$(EAP_PEER_SRCDIR)/tncc.c 
+
+EAP_PEER_SOURCES +=  $(EAP_PEER_SRCDIR)/eap_methods.c \
+		   $(EAP_PEER_SRCDIR)/eap_tls_common.c \
+		   $(EAP_PEER_SRCDIR)/eap.c
 
 AP_SOURCES = $(AP_SRCDIR)/ap_config.c \
              $(AP_SRCDIR)/ap_mlme.c \
