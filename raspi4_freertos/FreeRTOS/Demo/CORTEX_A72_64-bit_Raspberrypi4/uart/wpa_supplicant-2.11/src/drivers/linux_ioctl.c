@@ -11,6 +11,18 @@
 #include <net/if.h>
 #include <net/if_arp.h>
 
+#ifndef SIOCSIFHWADDR
+#define SIOCSIFHWADDR 0x8924  /* ioctl command to set hardware (MAC) address */
+#endif
+
+
+
+
+
+//include <linux/sockios.h>
+
+
+
 #include "utils/common.h"
 #include "common/linux_bridge.h"
 #include "linux_ioctl.h"
