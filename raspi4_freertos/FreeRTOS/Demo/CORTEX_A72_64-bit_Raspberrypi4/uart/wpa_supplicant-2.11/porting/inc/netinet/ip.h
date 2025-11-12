@@ -21,8 +21,8 @@ struct ip {
 
 
 
-/* Minimal IPv4 header definition for FreeRTOS/lwIP build */
-struct iphdr {
+/* Minimal IPv4 header definition for FreeRTOS/lwIP build 
+  struct iphdr {
     uint8_t  ihl:4;
     uint8_t  version:4;
     uint8_t  tos;
@@ -35,6 +35,9 @@ struct iphdr {
     uint32_t saddr;
     uint32_t daddr;
 };
+*/
+
+
 
 #endif /* _NETINET_IP_H */
 
