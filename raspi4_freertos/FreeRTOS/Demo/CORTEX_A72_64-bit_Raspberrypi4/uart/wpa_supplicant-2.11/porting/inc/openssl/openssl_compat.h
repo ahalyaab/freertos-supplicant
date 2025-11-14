@@ -71,7 +71,7 @@ static inline int EVP_PKEY_base_id(EVP_PKEY *p) { (void)p; return 0; }
 #define OPENSSL_COMPAT_EVP 1
 #endif
 
-/* HMAC and EVP_MD_CTX alloc/free */
+/* HMAC and EVP_MD_CTX alloc/free 
 #ifndef OPENSSL_COMPAT_HMAC_EVPCTX
 static inline HMAC_CTX *HMAC_CTX_new(void) { return NULL; }
 static inline void HMAC_CTX_free(HMAC_CTX *ctx) { (void)ctx; }
@@ -80,8 +80,9 @@ static inline EVP_MD_CTX *EVP_MD_CTX_new(void) { return NULL; }
 static inline void EVP_MD_CTX_free(EVP_MD_CTX *ctx) { (void)ctx; }
 #define OPENSSL_COMPAT_HMAC_EVPCTX 1
 #endif
+*/
 
-/* ASN1 helpers */
+/* ASN1 helpers 
 #ifndef OPENSSL_COMPAT_ASN1
 static inline const unsigned char *ASN1_STRING_get0_data(const ASN1_STRING *x) {
     return x ? x->data : NULL;
@@ -93,6 +94,10 @@ static inline const ASN1_TIME *X509_get0_notBefore(const X509 *x) { (void)x; ret
 static inline const ASN1_TIME *X509_get0_notAfter(const X509 *x)  { (void)x; return NULL; }
 #define OPENSSL_COMPAT_ASN1 1
 #endif
+*/
+
+
+
 
 /* BIGNUM stubs (real implementations exist in porting/src; these are fallback) */
 #ifndef OPENSSL_COMPAT_BN
@@ -112,7 +117,7 @@ static inline void DH_free(DH *dh) { (void)dh; }
 
 /* AES helpers - only basic prototypes; porting provides AES routines */
 #ifndef OPENSSL_COMPAT_AES
-static inline void AES_set_encrypt_key(const unsigned char *userKey, const int bits, AES_KEY *key) { (void)userKey; (void)bits; (void)key; }
+static inline int AES_set_encrypt_key(const unsigned char *userKey, const int bits, AES_KEY *key) { (void)userKey; (void)bits; (void)key; return 0; }
 static inline void AES_encrypt(const unsigned char *in, unsigned char *out, const AES_KEY *key) { (void)in; (void)out; (void)key; }
 #define OPENSSL_COMPAT_AES 1
 #endif

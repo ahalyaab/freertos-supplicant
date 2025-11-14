@@ -1,5 +1,3 @@
-#ifndef OPENSSL_RSA_H
-#define OPENSSL_RSA_H
+#pragma once
 #include "openssl_compat.h"
-#endif
 

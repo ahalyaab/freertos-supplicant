@@ -1,5 +1,3 @@
-#ifndef OPENSSL_X509V3_H
-#define OPENSSL_X509V3_H
+#pragma once
 #include "openssl_compat.h"
-#endif
 

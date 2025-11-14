@@ -56,8 +56,10 @@ CFLAGS = -mcpu=cortex-a72 \
          -I$(INCLUDEPATH20) \
          -I$(INCLUDEPATH21) \
 	 -I$(INCLUDEPATH22) \
-	 -Isrc
- 
+	 -Isrc \
+	 -Iporting/inc/openssl
+
+
 BUILTIN_OPS = -fno-builtin-memset
 ASMFLAGS = -mcpu=cortex-a72
 INCLUDEPATH1 ?=hs20/client

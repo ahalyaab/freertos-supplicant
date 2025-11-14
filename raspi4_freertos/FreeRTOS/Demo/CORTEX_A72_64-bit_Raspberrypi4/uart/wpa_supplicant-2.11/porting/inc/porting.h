@@ -311,7 +311,7 @@ enum macsec_offload {
 typedef uint32_t u32;
 typedef uint16_t u16;
 
-struct nlmsghdr
+/*struct nlmsghdr
 {
         u32 nlmsg_len;
         u16 nlmsg_type;
@@ -320,6 +320,7 @@ struct nlmsghdr
         u32 nlmsg_pid;
 };
 
+*/
 
 struct nlmsgerr {
         int             error;
@@ -343,17 +344,17 @@ typedef struct hmac_ctx_st {
 };
 
 typedef struct hmac_ctx_st HMAC_CTX;
-typedef struct CMAC_CTX_st CMAC_CTX;
+//typedef struct CMAC_CTX_st CMAC_CTX;
 typedef struct asn1_string_st ASN1_TIME;
 typedef struct evp_pkey_ctx_st EVP_PKEY_CTX;
 typedef struct asn1_string_st ASN1_INTEGER;
 typedef struct ssl_cipher_st SSL_CIPHER;
 
-extern unsigned short _ctype_[256];  // Declare _ctype_ if needed
+//extern unsigned short _ctype_[256];  // Declare _ctype_ if needed
 
 /*unsigned short _ctype_[256] = {
 };*/
-extern void* _impure_ptr;
+//extern void* _impure_ptr;
 //unsigned short _ctype_[256] = { 0 };
 #define isspace(c) ((c) == ' ' || (c) == '\t' || (c) == '\n' || (c) == '\r' || (c) == '\v' || (c) == '\f')
 #define isblank(c) ((c) == ' ' || (c) == '\t')
@@ -427,13 +428,16 @@ typedef struct GENERAL_NAME_st {
 } GENERAL_NAME;
 
 void GENERAL_NAME_free(GENERAL_NAME *a);
-struct nlattr {
+/*struct nlattr {
         __u16           nla_len;
         __u16           nla_type;
 };
+*/
 struct dirent {
     char d_name[256]; // Adjust the size as needed
 };
+
+/*
 struct nla_policy {
         uint16_t        type;
 
@@ -441,16 +445,20 @@ struct nla_policy {
 
         uint16_t        maxlen;
 };
+*/
+
+
+/*
 enum {
-        NLA_UNSPEC,     /**< Unspecified type, binary data chunk */
-        NLA_U8,         /**< 8 bit integer */
-        NLA_U16,        /**< 16 bit integer */
-        NLA_U32,        /**< 32 bit integer */
-        NLA_U64,        /**< 64 bit integer */
-        NLA_STRING,     /**< NUL terminated character string */
-        NLA_FLAG,       /**< Flag */
-        NLA_MSECS,      /**< Micro seconds (64bit) */
-        NLA_NESTED,     /**< Nested attributes */
+        __NLA_UNSPEC,     Unspecified type, binary data chunk 
+        NLA_U8,         **< 8 bit integer 
+        NLA_U16,        **< 16 bit integer 
+        NLA_U32,        **< 32 bit integer 
+       // NLA_U64,        **< 64 bit integer 
+       // NLA_STRING,     **< NUL terminated character string 
+       // NLA_FLAG,       **< Flag 
+        //NLA_MSECS,      
+        //NLA_NESTED,     
         NLA_NESTED_COMPAT,
         NLA_NUL_STRING,
         NLA_BINARY,
@@ -460,20 +468,28 @@ enum {
         NLA_S64,
         __NLA_TYPE_MAX,
 };
+*/
+
+
+
 struct termios {
     unsigned int c_lflag;  // This is the flag field, only store what you need
 };
 
 
 
-struct genlmsghdr {
+/*struct genlmsghdr {
     uint8_t cmd;  // Command type
     uint8_t version;  // Version field (usually 1)
     uint8_t reserved;  // Reserved field (set to 0)
     uint8_t hdrlen;  // Length of the header (variable)
 };
+
+*/
+
+
 #define nlmsg_hdr(msg) ((struct nlmsg_hdr *)(msg))
-//struct nlmsg_hdr *msg;
+
 struct nlmsg_hdr {
         __u32           nlmsg_len;
         __u16           nlmsg_type;
@@ -482,9 +498,13 @@ struct nlmsg_hdr {
         __u32           nlmsg_pid;
 };
 int alphasort(const struct dirent **a, const struct dirent **b);
+
+/*
 typedef struct {
     uint32_t bits[8]; // Adjust size based on the maximum number of file descriptors
 } fd_set;
+
+
 struct tm {
     int tm_sec;   // Seconds (0-59)
     int tm_min;   // Minutes (0-59)
@@ -496,6 +516,9 @@ struct tm {
     int tm_yday;  // Day of the year (0-365)
     int tm_isdst; // Daylight Saving Time flag
 };
+
+*/
+
 struct ecc_curve {
     size_t size;
 };
