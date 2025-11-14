@@ -167,7 +167,7 @@ CONFIG_EAP_GPSK=y
 CONFIG_EAP_GPSK_SHA256=y
 
 # EAP-TNC and related Trusted Network Connect support (experimental)
-#CONFIG_EAP_TNC=y
+CONFIG_EAP_TNC=y
 
 # Wi-Fi Protected Setup (WPS)
 CONFIG_WPS=y
@@ -332,7 +332,6 @@ CONFIG_BACKEND=file
 # linux = Linux kernel AF_ALG and internal TLSv1 implementation (experimental)
 # none = Empty template
 #CONFIG_TLS=openssl
-CONFIG_TLS=internal
 
 # TLS-based EAP methods require at least TLS v1.0. Newer version of TLS (v1.1)
 # can be enabled to get a stronger construction of messages when block ciphers
