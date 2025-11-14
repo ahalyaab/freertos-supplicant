@@ -1,0 +1,21 @@
+# === Build and Binary Outputs ===
+**/build/
+**/*.elf
+**/*.map
+
+# === Temporary / Text / Scripts ===
+**/*.txt
+**/*.log
+**/*.tmp
+**/*.bak
+**/*.swp
+**/*.swo
+
+# === Shell Scripts at Any Depth ===
+**/*.sh
+
+# === Backup and Archive Files ===
+**/*.tar.gz
+**/*.zip
+**/*.tar
+
