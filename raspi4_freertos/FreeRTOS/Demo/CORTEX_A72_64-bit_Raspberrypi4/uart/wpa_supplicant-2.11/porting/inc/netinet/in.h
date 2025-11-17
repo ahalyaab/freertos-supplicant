@@ -17,6 +17,12 @@ struct in_addr {
     in_addr_t s_addr;
 };
 
+
+struct in6_addr {
+    uint8_t s6_addr[16];
+};
+
+
 /* sockaddr_in for IPv4 sockets */
 struct sockaddr_in {
     uint16_t sin_family;
@@ -41,6 +47,9 @@ struct iphdr {
 };
 
 
+#ifndef INET6_ADDRSTRLEN
+#define INET6_ADDRSTRLEN 46
+#endif
 
 
 
