@@ -25,7 +25,6 @@ CFLAGS = -mcpu=cortex-a72 \
 	 -DNEED_AP_MLME \
 	 -DCONFIG_DPP \
 	 -DCONFIG_P2P \
-	 -DCONFIG_CTRL_IFACE_DBUS_NEW \
 	 -DCONFIG_AP \
 	 -DCONFIG_WNM \
 	 -DCONFIG_WIFI_DISPLAY \
@@ -57,8 +56,8 @@ CFLAGS = -mcpu=cortex-a72 \
          -I$(INCLUDEPATH21) \
 	 -I$(INCLUDEPATH22) \
 	 -Isrc \
-	 -Iporting/inc/openssl
-
+	 -Iporting/inc/openssl \
+	
 
 BUILTIN_OPS = -fno-builtin-memset
 ASMFLAGS = -mcpu=cortex-a72
@@ -112,7 +111,7 @@ EAPOL_SUPP_SRCDIR         = $(SRCDIR)/eapol_supp
 EAP_SERVER_SRCDIR         = $(SRCDIR)/eap_server
 PAE_SRCDIR		  = $(SRCDIR)/pae
 PASN_SRCDIR               = $(SRCDIR)/pasn
-DBUS_WPA_SRCDIR           = $(WPA_SRCDIR)/dbus
+#DBUS_WPA_SRCDIR           = $(WPA_SRCDIR)/dbus
 WPA_SUPP_SRCDIR           = $(WPA_SRCDIR)
 WPASUPPLI_SRCDIR          = $(WPASUPP_SRCDIR)/porting/src
 RADIUS_SRCDIR		  = $(SRCDIR)/radius
@@ -305,7 +304,7 @@ EAP_SERVER_SOURCES = $(EAP_SERVER_SRCDIR)/eap_server.c \
                      $(EAP_SERVER_SRCDIR)/eap_server_methods.c \
                      $(EAP_SERVER_SRCDIR)/eap_server_wsc.c
 #list of dbus
-DBUS_WPA_SOURCES = $(DBUS_WPA_SRCDIR)/dbus_new_helpers.c \
+#DBUS_WPA_SOURCES = $(DBUS_WPA_SRCDIR)/dbus_new_helpers.c \
                $(DBUS_WPA_SRCDIR)/dbus_new_handlers.c \
                $(DBUS_WPA_SRCDIR)/dbus_common.c \
                $(DBUS_WPA_SRCDIR)/dbus_new_handlers_wps.c \
@@ -356,10 +355,11 @@ WPA_SUPP_SOURCES +=$(WPA_SUPP_SRCDIR)/p2p_supplicant.c
 #WPASUPPLI_SOURCES += $(WPASUPPLI_SRCDIR)/my_memory_utils.c
 #WPASUPPLI_SOURCES += $(WPASUPPLI_SRCDIR)/panic.c
 
+PORTING_SRCS = porting/src/dbus_stub.c
+
 
 # Combine the sources from both directories
-SOURCES = $(WPASUPPLI_SOURCES) $(WPA_SUPP_SOURCES) $(TLS_SOURCES) $(P2P_SOURCES) $(PASN_SOURCES) $(PAE_SOURCES) $(WPS_SOURCES) $(L2_PACKET_SOURCES) $(DRIVERS_SOURCES) $(UTILS_SOURCES) $(RSNSUPP_SOURCES) $(EAP_PEER_SOURCES) $(AP_SOURCES) $(CRYPTO_SOURCES) $(COMMON_SOURCES) $(EAPOL_SUPP_SOURCES) $(EAPOL_AUTH_SOURCES) $(EAP_COMMON_SOURCES) $(EAP_SERVER_SOURCES) $(DBUS_WPA_SOURCES)
-
+SOURCES = $(WPASUPPLI_SOURCES) $(WPA_SUPP_SOURCES) $(TLS_SOURCES) $(P2P_SOURCES) $(PASN_SOURCES) $(PAE_SOURCES) $(WPS_SOURCES) $(L2_PACKET_SOURCES) $(DRIVERS_SOURCES) $(UTILS_SOURCES) $(RSNSUPP_SOURCES) $(EAP_PEER_SOURCES) $(AP_SOURCES) $(CRYPTO_SOURCES) $(COMMON_SOURCES) $(EAPOL_SUPP_SOURCES) $(EAPOL_AUTH_SOURCES) $(EAP_COMMON_SOURCES) $(EAP_SERVER_SOURCES) 
 # Add object files for all the sources from directories
 OBJS = $(patsubst $(SRCDIR)/%.c,build/%.o,$(SOURCES)) \
        $(patsubst $(WPA_SRCDIR)/%.c,build/%.o,$(SOURCES)) \

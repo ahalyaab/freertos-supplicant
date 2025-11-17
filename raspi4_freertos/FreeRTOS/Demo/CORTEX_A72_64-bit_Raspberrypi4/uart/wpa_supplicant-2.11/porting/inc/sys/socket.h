@@ -21,6 +21,9 @@
 /* Basic typedef */
 typedef int socklen_t;
 
+typedef uint16_t sa_family_t;
+
+
 /* Socket types */
 #define SOCK_STREAM 1
 #define SOCK_DGRAM  2
@@ -57,6 +60,14 @@ struct sockaddr_in {
     char sin_zero[8];
 };
 */
+
+
+struct sockaddr_storage {
+    sa_family_t ss_family;
+    char __ss_padding[128];   // unused, just to satisfy size
+};
+
+
 
 /* ---------------------------------------------------------------------
  *                         SCATTER/GATHER I/O STRUCTURES
@@ -124,6 +135,7 @@ static inline int getsockopt(int sockfd, int level, int optname,
     (void)sockfd; (void)level; (void)optname; (void)optval; (void)optlen;
     return 0;
 }
+
 
 /* ---------------------------------------------------------------------
  *                         BPF (FILTER) STUBS

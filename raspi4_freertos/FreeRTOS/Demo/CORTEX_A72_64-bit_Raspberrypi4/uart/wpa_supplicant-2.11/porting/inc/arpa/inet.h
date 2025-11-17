@@ -7,6 +7,12 @@
 /*
  * Minimal stub for <arpa/inet.h>
  */
+#ifndef INET_ADDRSTRLEN
+#define INET_ADDRSTRLEN 16   /* "255.255.255.255\0" */
+#endif
+
+
+
 
 static inline unsigned int inet_addr(const char *cp) { (void)cp; return 0; }
 static inline const char *inet_ntoa(struct in_addr in) { (void)in; return "0.0.0.0"; }
